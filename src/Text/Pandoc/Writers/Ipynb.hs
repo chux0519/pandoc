@@ -91,11 +91,11 @@ addAttachment :: PandocMonad m
               -> StateT (M.Map Text MimeBundle) m Inline
 addAttachment (Image attr lab (src,tit))
   | not (isURI src) = do
-  (img, mbmt) <- fetchItem src
-  let mt = maybe "application/octet-stream" (T.pack) mbmt
-  modify $ M.insert (T.pack src)
-          (MimeBundle (M.insert mt (BinaryData img) mempty))
-  return $ Image attr lab ("attachment:" <> src, tit)
+  -- (img, mbmt) <- fetchItem src
+  -- let mt = maybe "application/octet-stream" (T.pack) mbmt
+  -- modify $ M.insert (T.pack src)
+  --         (MimeBundle (M.insert mt (BinaryData img) mempty))
+  return $ Image attr lab ("" <> src, tit)
 addAttachment x = return x
 
 extractCells :: PandocMonad m => WriterOptions -> [Block] -> m [Cell a]
